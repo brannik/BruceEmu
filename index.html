@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BruceEmu - Bruce JS Interpreter Emulator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #4CAF50;
+        }
+        
+        .module-section {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .module-section h2 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #45a049;
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+        
+        input, textarea {
+            padding: 8px;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            background: #1a1a1a;
+            color: #fff;
+            font-family: monospace;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .canvas-container {
+            background: #000;
+            border: 2px solid #4CAF50;
+            display: inline-block;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        #display {
+            image-rendering: pixelated;
+            border: 1px solid #4CAF50;
+        }
+        
+        .info {
+            background: #1a1a1a;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #4CAF50;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #888;
+            font-size: 12px;
+        }
+        
+        .input-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 BruceEmu - Bruce JS Interpreter Emulator</h1>
+        
+        <div class="module-section">
+            <h2>📺 Display Module</h2>
+            <div class="canvas-container">
+                <canvas id="display" width="128" height="64"></canvas>
+            </div>
+            <div class="controls">
+                <button onclick="testDisplay()">Test Print</button>
+                <button onclick="testDisplayWrap()">Test Wrap</button>
+                <button onclick="testDisplayClear()">Clear</button>
+            </div>
+            <div class="info" id="display-info">Display ready</div>
+        </div>
+        
+        <div class="grid">
+            <div class="module-section">
+                <h2>💬 Dialog Module</h2>
+                <div class="controls">
+                    <button onclick="testDialog()">Show Dialog</button>
+                    <button onclick="testDialogMulti()">Multi-Button Dialog</button>
+                </div>
+                <div class="info" id="dialog-info">Click buttons to test</div>
+            </div>
+            
+            <div class="module-section">
+                <h2>📳 Notification Module</h2>
+                <div class="controls">
+                    <button onclick="testVibrate(100)">Vibrate 100ms</button>
+                    <button onclick="testVibrate(500)">Vibrate 500ms</button>
+                    <button onclick="testVibrate(1000)">Vibrate 1s</button>
+                </div>
+                <div class="info" id="notification-info">Click to vibrate</div>
+            </div>
+        </div>
+        
+        <div class="module-section">
+            <h2>💾 Storage Module</h2>
+            <div class="input-group">
+                <label>File Path:</label>
+                <input type="text" id="storage-path" value="/test.txt" style="width: 200px;">
+            </div>
+            <div class="input-group">
+                <label>Content:</label>
+                <textarea id="storage-content">Hello from BruceEmu!</textarea>
+            </div>
+            <div class="controls">
+                <button onclick="testStorageWrite()">Write File</button>
+                <button onclick="testStorageRead()">Read File</button>
+                <button onclick="testStorageList()">List Files</button>
+                <button onclick="testStorageClear()">Clear Storage</button>
+            </div>
+            <div class="info" id="storage-info">Storage ready</div>
+        </div>
+        
+        <div class="grid">
+            <div class="module-section">
+                <h2>📡 BLE Module</h2>
+                <div class="input-group">
+                    <label>Fake Device Name:</label>
+                    <input type="text" id="ble-name" value="BLE Device" style="width: 200px;">
+                </div>
+                <div class="controls">
+                    <button onclick="testBLEInject()">Inject Fake Device</button>
+                    <button onclick="testBLEScan()">Scan BLE</button>
+                    <button onclick="testBLEClear()">Clear Fakes</button>
+                </div>
+                <div class="info" id="ble-info">BLE ready</div>
+            </div>
+            
+            <div class="module-section">
+                <h2>📶 WiFi Module</h2>
+                <div class="input-group">
+                    <label>Fake SSID:</label>
+                    <input type="text" id="wifi-ssid" value="TestNetwork" style="width: 200px;">
+                </div>
+                <div class="controls">
+                    <button onclick="testWiFiInject()">Inject Fake Network</button>
+                    <button onclick="testWiFiScan()">Scan WiFi</button>
+                    <button onclick="testWiFiClear()">Clear Fakes</button>
+                </div>
+                <div class="info" id="wifi-info">WiFi ready</div>
+            </div>
+        </div>
+        
+        <div class="module-section">
+            <h2>🎮 Device Module</h2>
+            <div class="input-group">
+                <label>Button Name:</label>
+                <input type="text" id="button-name" value="OK" style="width: 200px;">
+            </div>
+            <div class="controls">
+                <button onclick="testDeviceButton()">Add Button</button>
+                <button onclick="testDeviceScan()">Test All Scans</button>
+            </div>
+            <div class="info" id="device-info">Device ready. Buttons will appear at bottom left.</div>
+        </div>
+    </div>
+    
+    <!-- Load all modules -->
+    <script src="display.js"></script>
+    <script src="dialog.js"></script>
+    <script src="notification.js"></script>
+    <script src="storage.js"></script>
+    <script src="ble.js"></script>
+    <script src="wifi.js"></script>
+    <script src="device.js"></script>
+    
+    <script>
+        // Initialize display
+        display.init('display');
+        
+        // Display Module Tests
+        function testDisplay() {
+            display.clear();
+            display.print(10, 20, 'Hello Bruce!');
+            display.print(10, 35, 'x:' + display.cursor.x);
+            display.print(10, 50, 'y:' + display.cursor.y);
+            updateInfo('display-info', 'Printed text at multiple positions');
+        }
+        
+        function testDisplayWrap() {
+            display.clear();
+            display.print(5, 15, 'This is a long text that should wrap around the display', true);
+            updateInfo('display-info', 'Printed with word wrap enabled');
+        }
+        
+        function testDisplayClear() {
+            display.clear();
+            updateInfo('display-info', 'Display cleared');
+        }
+        
+        // Dialog Module Tests
+        async function testDialog() {
+            const result = await dialog.message({
+                title: 'Test Dialog',
+                message: 'This is a test message from BruceEmu!',
+                buttons: ['OK']
+            });
+            updateInfo('dialog-info', 'Dialog closed, button index: ' + result);
+        }
+        
+        async function testDialogMulti() {
+            const result = await dialog.message({
+                title: 'Choose an Option',
+                message: 'Please select one of the following options:',
+                buttons: ['Yes', 'No', 'Cancel']
+            });
+            updateInfo('dialog-info', 'Selected button index: ' + result);
+        }
+        
+        // Notification Module Tests
+        function testVibrate(ms) {
+            notification.vibrate(ms);
+            updateInfo('notification-info', `Vibrated for ${ms}ms`);
+        }
+        
+        // Storage Module Tests
+        function testStorageWrite() {
+            const path = document.getElementById('storage-path').value;
+            const content = document.getElementById('storage-content').value;
+            
+            const file = storage.open({ fs: 'sd', path: path, mode: 'w' });
+            file.write(content);
+            file.close();
+            
+            updateInfo('storage-info', `Written to ${path}: "${content}"`);
+        }
+        
+        function testStorageRead() {
+            const path = document.getElementById('storage-path').value;
+            
+            if (!storage.exists('sd', path)) {
+                updateInfo('storage-info', `File ${path} does not exist`);
+                return;
+            }
+            
+            const file = storage.open({ fs: 'sd', path: path, mode: 'r' });
+            const content = file.readAll();
+            file.close();
+            
+            document.getElementById('storage-content').value = content;
+            updateInfo('storage-info', `Read from ${path}: "${content}"`);
+        }
+        
+        function testStorageList() {
+            const files = storage.list('sd', '/');
+            updateInfo('storage-info', 'Files: ' + (files.length > 0 ? files.join(', ') : 'none'));
+        }
+        
+        function testStorageClear() {
+            const files = storage.list('sd', '/');
+            files.forEach(file => storage.remove('sd', file));
+            updateInfo('storage-info', 'Storage cleared');
+        }
+        
+        // BLE Module Tests
+        function testBLEInject() {
+            const name = document.getElementById('ble-name').value;
+            const device = ble.injectFake({
+                name: name,
+                rssi: -50 - Math.floor(Math.random() * 30)
+            });
+            updateInfo('ble-info', `Injected: ${device.name} (${device.id})`);
+        }
+        
+        async function testBLEScan() {
+            updateInfo('ble-info', 'Scanning for BLE devices...');
+            const devices = await ble.scan({ duration: 2000 });
+            updateInfo('ble-info', `Found ${devices.length} device(s): ` + 
+                devices.map(d => `${d.name} (${d.rssi}dBm)`).join(', '));
+        }
+        
+        function testBLEClear() {
+            ble.clearFakes();
+            updateInfo('ble-info', 'Cleared fake devices');
+        }
+        
+        // WiFi Module Tests
+        function testWiFiInject() {
+            const ssid = document.getElementById('wifi-ssid').value;
+            const network = wifi.injectFake({
+                ssid: ssid,
+                rssi: -40 - Math.floor(Math.random() * 40),
+                channel: Math.floor(Math.random() * 11) + 1
+            });
+            updateInfo('wifi-info', `Injected: ${network.ssid} on channel ${network.channel}`);
+        }
+        
+        async function testWiFiScan() {
+            updateInfo('wifi-info', 'Scanning for WiFi networks...');
+            const networks = await wifi.scan({ duration: 2000 });
+            updateInfo('wifi-info', `Found ${networks.length} network(s): ` + 
+                networks.map(n => `${n.ssid} (${n.rssi}dBm, ch${n.channel})`).join(', '));
+        }
+        
+        function testWiFiClear() {
+            wifi.clearFakes();
+            updateInfo('wifi-info', 'Cleared fake networks');
+        }
+        
+        // Device Module Tests
+        let buttonCounter = 0;
+        function testDeviceButton() {
+            const name = document.getElementById('button-name').value || `BTN${++buttonCounter}`;
+            device.onButton(name, () => {
+                updateInfo('device-info', `Button "${name}" pressed!`);
+            });
+            updateInfo('device-info', `Added button: ${name}`);
+        }
+        
+        async function testDeviceScan() {
+            updateInfo('device-info', 'Running BLE and WiFi scans...');
+            
+            const [bleDevices, wifiNetworks] = await Promise.all([
+                device.bleScan({ duration: 2000 }),
+                device.wifiScan({ duration: 2000 })
+            ]);
+            
+            updateInfo('device-info', 
+                `BLE: ${bleDevices.length} devices, WiFi: ${wifiNetworks.length} networks`);
+        }
+        
+        // Utility function
+        function updateInfo(id, message) {
+            const element = document.getElementById(id);
+            const timestamp = new Date().toLocaleTimeString();
+            element.innerHTML = `[${timestamp}] ${message}`;
+        }
+        
+        // Initial test
+        testDisplay();
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "bruceemu",
+  "version": "1.0.0",
+  "description": "Emulator for bruce js interpreter scripts",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
+  "keywords": ["bruce", "emulator", "javascript"],
+  "author": "",
+  "license": "ISC"
+}
