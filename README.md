@@ -1,8 +1,15 @@
 # BruceEmu
 
-Emulator for bruce js interpreter scripts
+Emulator for BruceJS interpreter scripts - Test your BruceJS scripts both in Node.js and in the browser with full device emulation!
 
-## Features
+## Overview
+
+BruceEmu consists of two main components:
+
+1. **Node.js Runtime (`bruce_runtime.js`)**: A server-side runtime for executing BruceJS scripts with CommonJS module support
+2. **Browser Emulator (`index.html`)**: A browser-based emulator for testing BruceJS scripts with emulated hardware devices (BLE, WiFi, buttons)
+
+## Node.js Runtime Features
 
 - **CommonJS Module System**: Full support for `require()` and `module.exports`
 - **Module Loading**: Load modules from the `modules/` directory
@@ -19,7 +26,7 @@ Emulator for bruce js interpreter scripts
 npm install
 ```
 
-## Usage
+## Node.js Runtime Usage
 
 ### Running Scripts
 
@@ -190,14 +197,11 @@ Run the test suite:
 npm test
 ```
 
-## License
+---
 
-MIT
-Emulator for BruceJS interpreter scripts - Test your BruceJS scripts in the browser with full device emulation!
+## Browser Emulator
 
-## Features
-
-BruceEmu provides a browser-based emulator for testing BruceJS scripts with emulated hardware devices:
+The browser emulator provides a visual testing environment for BruceJS scripts with emulated hardware devices:
 
 ### 🔷 **BLE Device Emulation**
 - Emulates BLE devices with `{addr, name, rssi}` properties

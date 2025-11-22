@@ -337,10 +337,23 @@ const emulator = {
     
     /**
      * Run the script from the editor
+     * 
+     * SECURITY NOTE: This function uses new Function() to execute user-provided code.
+     * This approach is necessary for browser-based script execution but has security implications:
+     * - Only use in development/testing environments
+     * - Never execute untrusted code
+     * - Scripts have full access to the browser JavaScript context
+     * 
+     * For production environments, consider using a proper sandboxing solution.
      */
     runScript() {
         const scriptEditor = document.getElementById('script-editor');
         const script = scriptEditor.value;
+        
+        if (!script || script.trim().length === 0) {
+            this.log('No script to run', 'warn');
+            return;
+        }
         
         if (this.isRunning) {
             this.log('Script is already running. Stop it first.', 'warn');
