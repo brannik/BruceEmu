@@ -91,8 +91,30 @@ class Display {
     this.ctx.fillRect(0, 0, this.width, this.height);
     this.ctx.fillStyle = '#fff';
     
+    // Render without modifying the buffer
     for (let item of this.buffer) {
-      this.print(item.x, item.y, item.text, item.wrap);
+      if (item.wrap) {
+        const maxWidth = this.width - item.x;
+        const words = item.text.split(' ');
+        let line = '';
+        let currentY = item.y;
+        
+        for (let word of words) {
+          const testLine = line + word + ' ';
+          const metrics = this.ctx.measureText(testLine);
+          
+          if (metrics.width > maxWidth && line !== '') {
+            this.ctx.fillText(line.trim(), item.x, currentY);
+            line = word + ' ';
+            currentY += this.charHeight;
+          } else {
+            line = testLine;
+          }
+        }
+        this.ctx.fillText(line.trim(), item.x, currentY);
+      } else {
+        this.ctx.fillText(item.text, item.x, item.y);
+      }
     }
   }
 }

@@ -31,7 +31,7 @@ class Storage {
 
         try {
           const data = localStorage.getItem(this.storageKey) || '';
-          const chunk = data.substr(this.position, length);
+          const chunk = data.substring(this.position, this.position + length);
           this.position += chunk.length;
           return chunk;
         } catch (e) {
@@ -80,8 +80,8 @@ class Storage {
             this.position = newData.length;
           } else if (this.mode === 'r+') {
             // Read/write mode: write at current position
-            const before = currentData.substr(0, this.position);
-            const after = currentData.substr(this.position + data.length);
+            const before = currentData.substring(0, this.position);
+            const after = currentData.substring(this.position + data.length);
             const newData = before + data + after;
             localStorage.setItem(this.storageKey, newData);
             this.position += data.length;
@@ -123,7 +123,7 @@ class Storage {
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (key && key.startsWith(storagePrefix)) {
-        files.push(key.substring(storagePrefix.length));
+        files.push(key.slice(storagePrefix.length));
       }
     }
     

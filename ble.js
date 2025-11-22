@@ -65,7 +65,7 @@ class BLE {
   injectFake(deviceInfo) {
     const fakeDevice = {
       name: deviceInfo.name || 'Fake Device',
-      id: deviceInfo.id || `fake_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      id: deviceInfo.id || `fake_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`,
       rssi: deviceInfo.rssi || -60,
       address: deviceInfo.address || deviceInfo.id || 'AA:BB:CC:DD:EE:FF',
       manufacturerData: deviceInfo.manufacturerData || null,
