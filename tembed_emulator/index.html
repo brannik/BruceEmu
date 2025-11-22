@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruce Emulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="emulator-panel">
+            <h1>Bruce Emulator</h1>
+            
+            <!-- Display Area -->
+            <div class="display-container">
+                <canvas id="display" width="320" height="240"></canvas>
+            </div>
+            
+            <!-- Virtual Buttons -->
+            <div class="button-panel">
+                <div class="button-row">
+                    <button class="btn" data-key="up">▲ UP</button>
+                </div>
+                <div class="button-row">
+                    <button class="btn" data-key="left">◄ LEFT</button>
+                    <button class="btn" data-key="ok">OK</button>
+                    <button class="btn" data-key="right">► RIGHT</button>
+                </div>
+                <div class="button-row">
+                    <button class="btn" data-key="down">▼ DOWN</button>
+                </div>
+                <div class="button-row">
+                    <button class="btn" data-key="back">BACK</button>
+                </div>
+            </div>
+            
+            <!-- Script Loader -->
+            <div class="script-loader">
+                <h3>Load Script</h3>
+                <select id="scriptSelect">
+                    <option value="">Select a script...</option>
+                </select>
+                <button id="loadScript" class="btn-primary">Load & Run</button>
+                <button id="stopScript" class="btn-danger">Stop</button>
+            </div>
+        </div>
+        
+        <!-- Console Log -->
+        <div class="console-panel">
+            <h3>Console Log</h3>
+            <div id="console" class="console-output"></div>
+            <button id="clearConsole" class="btn-secondary">Clear Console</button>
+        </div>
+    </div>
+    
+    <!-- Load modules first -->
+    <script src="modules/display.js"></script>
+    <script src="modules/dialog.js"></script>
+    <script src="modules/notification.js"></script>
+    <script src="modules/storage.js"></script>
+    <script src="modules/device.js"></script>
+    <script src="modules/ble.js"></script>
+    <script src="modules/wifi.js"></script>
+    
+    <!-- Load runtime and emulator -->
+    <script src="bruce_runtime.js"></script>
+    <script src="emulator.js"></script>
+</body>
+</html>
