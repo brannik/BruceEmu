@@ -193,6 +193,11 @@ npm test
 ## License
 
 MIT
+
+---
+
+# Browser-Based Emulator
+
 Emulator for BruceJS interpreter scripts - Test your BruceJS scripts in the browser with full device emulation!
 
 ## Features
