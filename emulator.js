@@ -306,12 +306,12 @@ const emulator = {
         };
         
         // Global functions
-        const println = (msg) => {
-            self.log(String(msg));
+        const println = (...args) => {
+            self.log(args.join(' '));
         };
         
-        const print = (msg) => {
-            self.log(String(msg));
+        const print = (...args) => {
+            self.log(args.join(' '));
         };
         
         // require() function to load modules
@@ -372,6 +372,7 @@ const emulator = {
         } catch (e) {
             this.log('Script Error: ' + e.message, 'error');
             this.log('Stack: ' + e.stack, 'error');
+        } finally {
             this.isRunning = false;
         }
     },
