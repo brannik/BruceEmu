@@ -1,0 +1,257 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+/* Emulator Panel */
+.emulator-panel {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    min-width: 400px;
+}
+
+.emulator-panel h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Display */
+.display-container {
+    background: #000;
+    border: 3px solid #333;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#display {
+    border: 1px solid #555;
+    background: #111;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    /* Scale up 320x240 to 640x480 for better visibility */
+    width: 640px;
+    height: 480px;
+}
+
+/* Button Panel */
+.button-panel {
+    margin-bottom: 20px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #f0f0f0 0%, #d0d0d0 100%);
+    cursor: pointer;
+    transition: all 0.1s;
+    min-width: 100px;
+}
+
+.btn:hover {
+    background: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(180deg, #c0c0c0 0%, #a0a0a0 100%);
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#script-select {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #667eea;
+    border-radius: 6px;
+    min-width: 200px;
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-danger {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+}
+
+.btn-danger:active {
+    transform: translateY(0);
+}
+
+.btn-danger:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Console Panel */
+.console-panel {
+    background: #1e1e1e;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    flex: 1;
+    min-width: 400px;
+    max-height: 700px;
+    display: flex;
+    flex-direction: column;
+}
+
+.console-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.console-header h2 {
+    color: #fff;
+    font-size: 20px;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    background: #333;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-small:hover {
+    background: #444;
+}
+
+.console-output {
+    background: #0d0d0d;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 15px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    color: #0f0;
+    overflow-y: auto;
+    flex: 1;
+    max-height: 600px;
+}
+
+.console-output div {
+    margin-bottom: 4px;
+    word-wrap: break-word;
+}
+
+.console-output .log {
+    color: #0f0;
+}
+
+.console-output .error {
+    color: #f66;
+}
+
+.console-output .warn {
+    color: #fa0;
+}
+
+.console-output .info {
+    color: #4af;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    #display {
+        width: 480px;
+        height: 360px;
+    }
+}
+
+@media (max-width: 768px) {
+    #display {
+        width: 320px;
+        height: 240px;
+    }
+    
+    .btn {
+        min-width: 80px;
+        padding: 10px 15px;
+    }
+}
