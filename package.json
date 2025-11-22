@@ -1,12 +1,32 @@
 {
   "name": "bruce-emu",
   "version": "1.0.0",
-  "description": "Emulator for bruce js interpreter scripts",
+  "description": "Emulator for BruceJS interpreter scripts - Test your scripts in Node.js or browser with full device emulation",
   "main": "bruce_runtime.js",
   "scripts": {
     "test": "node test/test_runtime.js"
   },
-  "keywords": ["emulator", "bruce", "javascript"],
+  "keywords": [
+    "emulator",
+    "bruce",
+    "javascript",
+    "ble",
+    "wifi",
+    "device-emulation",
+    "script-runner",
+    "commonjs"
+  ],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brannik/BruceEmu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brannik/BruceEmu/issues"
+  },
+  "homepage": "https://github.com/brannik/BruceEmu#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  }
 }
