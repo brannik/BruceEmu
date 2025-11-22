@@ -54,7 +54,10 @@ window.BruceRuntime = (function() {
             // Script control
             exit: function() {
                 throw new Error('Script exited');
-            }
+            },
+            
+            // Expose window object for event listeners and other global access
+            window: window
         };
         
         return context;
@@ -103,6 +106,9 @@ window.BruceRuntime = (function() {
     }
     
     // Stop running script
+    // Note: JavaScript functions cannot be forcibly stopped once started.
+    // This sets a flag but the script will continue executing until completion.
+    // Any pending timeouts/intervals will still execute.
     function stopScript() {
         if (currentScript) {
             currentScript = null;

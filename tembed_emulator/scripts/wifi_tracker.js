@@ -43,7 +43,6 @@ function updateDisplay() {
         display.drawText(ssid.substring(0, 18), 15, y, color, 11);
         
         // Security indicator
-        const lockIcon = network.encryption === 'Open' ? '🔓' : '🔒';
         const securityStr = network.encryption.substring(0, 4);
         display.drawText(securityStr, 190, y, color, 10);
         
@@ -64,6 +63,7 @@ function updateDisplay() {
     display.drawText('SSID', 15, 220, '#888888', 9);
     display.drawText('SEC', 190, 220, '#888888', 9);
     display.drawText('RSSI', 235, 220, '#888888', 9);
+    display.drawText('CH', 275, 220, '#888888', 9);
     
     // Draw border
     display.drawRect(5, 40, 310, 195, '#00ffff', false);
@@ -139,7 +139,6 @@ await startScan();
 
 // Display instructions
 display.drawText('Press MENU to rescan', 70, 205, '#888888', 10);
-updateDisplay();
 
 // Keep script running to allow interaction
 await device.delay(60000);
