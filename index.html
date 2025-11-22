@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BruceEmu - Bruce JS Interpreter Emulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>BruceEmu</h1>
+            <p class="subtitle">Bruce JS Interpreter Emulator</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Panel: Controls and Virtual Hardware -->
+            <div class="left-panel">
+                <!-- Script Selection -->
+                <div class="panel script-panel">
+                    <h2>Script</h2>
+                    <div class="script-controls">
+                        <select id="scriptDropdown">
+                            <option value="">-- Select Script --</option>
+                            <option value="hello">Hello World</option>
+                            <option value="blink">LED Blink</option>
+                            <option value="scan">WiFi Scanner</option>
+                            <option value="ble">BLE Scanner</option>
+                        </select>
+                        <button id="runScript" class="btn btn-primary">Run Script</button>
+                        <button id="stopScript" class="btn btn-secondary">Stop</button>
+                    </div>
+                </div>
+
+                <!-- Virtual Buttons -->
+                <div class="panel buttons-panel">
+                    <h2>Virtual Buttons</h2>
+                    <div class="button-grid">
+                        <button class="btn btn-virtual" data-button="A">Button A</button>
+                        <button class="btn btn-virtual" data-button="B">Button B</button>
+                        <button class="btn btn-virtual" data-button="C">Button C</button>
+                    </div>
+                </div>
+
+                <!-- BLE Panel -->
+                <div class="panel ble-panel">
+                    <h2>Fake BLE Devices</h2>
+                    <div class="add-controls">
+                        <input type="text" id="bleDeviceName" placeholder="Device name" class="input-field">
+                        <input type="number" id="bleRSSI" placeholder="RSSI" value="-65" class="input-field input-small">
+                        <button id="addBLE" class="btn btn-success">Add</button>
+                    </div>
+                    <div id="bleList" class="device-list"></div>
+                </div>
+
+                <!-- WiFi Panel -->
+                <div class="panel wifi-panel">
+                    <h2>Fake WiFi Networks</h2>
+                    <div class="add-controls">
+                        <input type="text" id="wifiSSID" placeholder="SSID" class="input-field">
+                        <input type="number" id="wifiRSSI" placeholder="RSSI" value="-55" class="input-field input-small">
+                        <button id="addWiFi" class="btn btn-success">Add</button>
+                    </div>
+                    <div id="wifiList" class="device-list"></div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Display and Console -->
+            <div class="right-panel">
+                <!-- Display -->
+                <div class="panel display-panel">
+                    <h2>Display</h2>
+                    <div id="display" class="display-output"></div>
+                </div>
+
+                <!-- Console -->
+                <div class="panel console-panel">
+                    <h2>Console Log</h2>
+                    <div id="console" class="console-output"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="emulator.js"></script>
+</body>
+</html>
