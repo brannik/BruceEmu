@@ -174,10 +174,13 @@ Scripts have access to these global functions:
 
 ## Examples
 
-See the `examples/` directory for more examples:
+See the `examples/` directory for demonstrations:
 
-- `test_script.js`: Demonstrates basic functionality
-- `test_isolation.js`: Demonstrates module isolation
+- `test_script.js`: Basic functionality (require, println, setTimeout)
+- `test_isolation.js`: Module isolation and caching
+- `test_relative.js`: Relative imports between modules
+- `comprehensive_demo.js`: All features in one example
+- `error_handling.js`: Error handling patterns
 
 ## Testing
 
