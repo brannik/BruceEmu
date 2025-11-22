@@ -173,18 +173,33 @@ class BruceEmulator {
         this.bleDevices.forEach((device, index) => {
             const item = document.createElement('div');
             item.className = 'device-item';
-            item.innerHTML = `
-                <div class="device-info">
-                    <span class="device-name">${device.name}</span>
-                    <div class="device-rssi">
-                        <span class="rssi-value">RSSI:</span>
-                        <input type="number" class="rssi-input" value="${device.rssi}" 
-                               onchange="emulator.updateBLERSSI(${index}, this.value)">
-                        <span class="rssi-value">dBm</span>
-                    </div>
-                </div>
-                <button class="btn btn-danger" onclick="emulator.removeBLEDevice(${index})">Remove</button>
+            
+            const deviceInfo = document.createElement('div');
+            deviceInfo.className = 'device-info';
+            
+            const deviceName = document.createElement('span');
+            deviceName.className = 'device-name';
+            deviceName.textContent = device.name;
+            
+            const deviceRssi = document.createElement('div');
+            deviceRssi.className = 'device-rssi';
+            deviceRssi.innerHTML = `
+                <span class="rssi-value">RSSI:</span>
+                <input type="number" class="rssi-input" value="${device.rssi}" 
+                       onchange="emulator.updateBLERSSI(${index}, this.value)">
+                <span class="rssi-value">dBm</span>
             `;
+            
+            deviceInfo.appendChild(deviceName);
+            deviceInfo.appendChild(deviceRssi);
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'btn btn-danger';
+            removeBtn.textContent = 'Remove';
+            removeBtn.onclick = () => this.removeBLEDevice(index);
+            
+            item.appendChild(deviceInfo);
+            item.appendChild(removeBtn);
             this.bleList.appendChild(item);
         });
     }
@@ -226,18 +241,33 @@ class BruceEmulator {
         this.wifiNetworks.forEach((network, index) => {
             const item = document.createElement('div');
             item.className = 'device-item';
-            item.innerHTML = `
-                <div class="device-info">
-                    <span class="device-name">${network.ssid}</span>
-                    <div class="device-rssi">
-                        <span class="rssi-value">RSSI:</span>
-                        <input type="number" class="rssi-input" value="${network.rssi}" 
-                               onchange="emulator.updateWiFiRSSI(${index}, this.value)">
-                        <span class="rssi-value">dBm</span>
-                    </div>
-                </div>
-                <button class="btn btn-danger" onclick="emulator.removeWiFiNetwork(${index})">Remove</button>
+            
+            const deviceInfo = document.createElement('div');
+            deviceInfo.className = 'device-info';
+            
+            const networkName = document.createElement('span');
+            networkName.className = 'device-name';
+            networkName.textContent = network.ssid;
+            
+            const deviceRssi = document.createElement('div');
+            deviceRssi.className = 'device-rssi';
+            deviceRssi.innerHTML = `
+                <span class="rssi-value">RSSI:</span>
+                <input type="number" class="rssi-input" value="${network.rssi}" 
+                       onchange="emulator.updateWiFiRSSI(${index}, this.value)">
+                <span class="rssi-value">dBm</span>
             `;
+            
+            deviceInfo.appendChild(networkName);
+            deviceInfo.appendChild(deviceRssi);
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'btn btn-danger';
+            removeBtn.textContent = 'Remove';
+            removeBtn.onclick = () => this.removeWiFiNetwork(index);
+            
+            item.appendChild(deviceInfo);
+            item.appendChild(removeBtn);
             this.wifiList.appendChild(item);
         });
     }
