@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruce T-Embed Emulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="emulator-panel">
+            <h1>Bruce T-Embed Emulator</h1>
+            
+            <!-- Display -->
+            <div class="display-container">
+                <canvas id="display" width="320" height="240"></canvas>
+            </div>
+            
+            <!-- Virtual Buttons -->
+            <div class="button-panel">
+                <div class="button-row">
+                    <button class="btn" data-key="up">↑ UP</button>
+                    <button class="btn" data-key="ok">OK</button>
+                </div>
+                <div class="button-row">
+                    <button class="btn" data-key="left">← LEFT</button>
+                    <button class="btn" data-key="down">↓ DOWN</button>
+                    <button class="btn" data-key="right">RIGHT →</button>
+                </div>
+                <div class="button-row">
+                    <button class="btn" data-key="back">← BACK</button>
+                    <button class="btn" data-key="menu">☰ MENU</button>
+                </div>
+            </div>
+            
+            <!-- Script Controls -->
+            <div class="controls">
+                <select id="script-select">
+                    <option value="">Select a script...</option>
+                </select>
+                <button id="run-script" class="btn-primary">Run Script</button>
+                <button id="stop-script" class="btn-danger">Stop Script</button>
+            </div>
+        </div>
+        
+        <!-- Console Log -->
+        <div class="console-panel">
+            <div class="console-header">
+                <h2>Console Log</h2>
+                <button id="clear-console" class="btn-small">Clear</button>
+            </div>
+            <div id="console" class="console-output"></div>
+        </div>
+    </div>
+
+    <!-- Load modules -->
+    <script src="modules/display.js"></script>
+    <script src="modules/dialog.js"></script>
+    <script src="modules/notification.js"></script>
+    <script src="modules/storage.js"></script>
+    <script src="modules/device.js"></script>
+    <script src="modules/ble.js"></script>
+    <script src="modules/wifi.js"></script>
+    
+    <!-- Load core -->
+    <script src="bruce_runtime.js"></script>
+    <script src="emulator.js"></script>
+</body>
+</html>
