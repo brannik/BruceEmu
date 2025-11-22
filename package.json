@@ -1,0 +1,12 @@
+{
+  "name": "bruce-emu",
+  "version": "1.0.0",
+  "description": "Emulator for bruce js interpreter scripts",
+  "main": "bruce_runtime.js",
+  "scripts": {
+    "test": "node test/test_runtime.js"
+  },
+  "keywords": ["emulator", "bruce", "javascript"],
+  "author": "",
+  "license": "MIT"
+}
