@@ -296,6 +296,12 @@ const emulator = {
                     self.buttonCallbacks.push(button);
                     self.log('Button callback registered for all buttons', 'info');
                 }
+                // Handle invalid arguments
+                else {
+                    const error = 'Invalid arguments for device.onButton(). Expected: onButton(callback) or onButton(button, callback)';
+                    self.log(error, 'error');
+                    throw new Error(error);
+                }
             }
         };
         

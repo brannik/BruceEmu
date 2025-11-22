@@ -62,5 +62,4 @@ wifi.scan();
 
 println('Scan active. Listening for WiFi networks...');
 println('Add new networks using the UI to see them appear here.');
-println('Total unique networks: ' + totalNetworks);
 println('');
