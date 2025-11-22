@@ -31,7 +31,7 @@ function updateDisplay() {
             const prefix = index === selectedIndex ? '> ' : '  ';
             
             // Security indicator
-            const secIcon = network.security === 'OPEN' ? '' : '🔒';
+            const secIcon = network.security === 'OPEN' ? '' : '[S]';
             
             display.print(
                 `${prefix}${secIcon}${network.ssid}`,

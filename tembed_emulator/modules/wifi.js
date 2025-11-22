@@ -168,6 +168,11 @@ class WiFiModule {
     
     // Generate MAC address
     generateMacAddress() {
+        return this.generateRandomMacAddress();
+    }
+    
+    // Shared utility for MAC address generation
+    generateRandomMacAddress() {
         const segments = [];
         for (let i = 0; i < 6; i++) {
             segments.push(Math.floor(Math.random() * 256).toString(16).padStart(2, '0'));

@@ -129,6 +129,12 @@ class BLEModule {
     
     // Generate UUID
     generateUUID() {
+        // Use crypto.randomUUID() if available for better security
+        if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+            return crypto.randomUUID();
+        }
+        
+        // Fallback to Math.random() for compatibility
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             const r = Math.random() * 16 | 0;
             const v = c === 'x' ? r : (r & 0x3 | 0x8);
@@ -138,6 +144,11 @@ class BLEModule {
     
     // Generate MAC address
     generateMacAddress() {
+        return this.generateRandomMacAddress();
+    }
+    
+    // Shared utility for MAC address generation
+    generateRandomMacAddress() {
         const segments = [];
         for (let i = 0; i < 6; i++) {
             segments.push(Math.floor(Math.random() * 256).toString(16).padStart(2, '0'));
