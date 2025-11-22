@@ -124,7 +124,7 @@ const emulator = {
         const securities = ['WPA2', 'WPA3', 'WPA', 'Open', 'WPA2-Enterprise'];
         const randomSSID = ssids[Math.floor(Math.random() * ssids.length)] + '_' + Math.floor(Math.random() * 1000);
         const randomBSSID = Array(6).fill(0).map(() => 
-            Math.floor(Math.random() * 256).toString(16).padStart(2, '0')
+            Math.floor(Math.random() * 256).toString(16).padStart(2, '0').toUpperCase()
         ).join(':');
         const randomChannel = [1, 6, 11][Math.floor(Math.random() * 3)];
         const randomRSSI = -Math.floor(Math.random() * 70 + 30);
@@ -281,19 +281,19 @@ const emulator = {
         
         // Device module
         const deviceModule = {
-            onButton(button, callback) {
+            onButton(buttonOrCallback, callback) {
                 // If called with 2 args: specific button and callback
-                if (typeof button === 'string' && typeof callback === 'function') {
+                if (typeof buttonOrCallback === 'string' && typeof callback === 'function') {
                     self.buttonCallbacks.push((pressedButton) => {
-                        if (pressedButton === button) {
+                        if (pressedButton === buttonOrCallback) {
                             callback(pressedButton);
                         }
                     });
-                    self.log(`Button callback registered for BTN ${button}`, 'info');
+                    self.log(`Button callback registered for BTN ${buttonOrCallback}`, 'info');
                 }
                 // If called with 1 arg: callback for all buttons
-                else if (typeof button === 'function') {
-                    self.buttonCallbacks.push(button);
+                else if (typeof buttonOrCallback === 'function') {
+                    self.buttonCallbacks.push(buttonOrCallback);
                     self.log('Button callback registered for all buttons', 'info');
                 }
                 // Handle invalid arguments
